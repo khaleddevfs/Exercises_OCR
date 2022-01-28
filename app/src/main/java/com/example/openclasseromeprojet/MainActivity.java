@@ -10,7 +10,10 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.jar.Attributes;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEditTe1;
     private EditText mEditTe2;
     private Button mBut1;
+    private EditText mName;
+
 
 
 
@@ -31,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         mEditTe2 = findViewById(R.id.main_editTe2);
         mBut1 = findViewById(R.id.main_but1);
         mBut1.setEnabled(false);
+        mName = findViewById(R.id.main_name);
+
 
         mEditTe1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,8 +81,12 @@ public class MainActivity extends AppCompatActivity {
 
                 String email = mEditTe1.getText().toString();
                 String passWord = mEditTe2.getText().toString();
+                String name = mName.getText().toString();
+
+
                 if (email.equals("admin@admin.com") && passWord.equals("admin")){
                     Intent welcomeActivityIntent = new Intent(MainActivity.this, WelcomeActivity.class);
+                    welcomeActivityIntent.putExtra("Name",name);
                     startActivity(welcomeActivityIntent);
                 }else {
                     Toast.makeText(MainActivity.this, "Email ou Mot de Passe Invalide", Toast.LENGTH_LONG).show();

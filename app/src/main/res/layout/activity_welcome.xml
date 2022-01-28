@@ -10,12 +10,12 @@
 
 
     <TextView
+        android:id="@+id/main_nameResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="332dp"
+        android:layout_marginTop="232dp"
         android:gravity="center_horizontal"
-        android:text="Welcome to the app"
         android:textColorHighlight="@color/design_default_color_surface"
         android:textSize="26sp"
         android:textStyle="bold"/>
