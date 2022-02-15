@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent welcomeActivityIntent = new Intent(MainActivity.this, WelcomeActivity.class);
                     welcomeActivityIntent.putExtra("Name",name);
                     startActivity(welcomeActivityIntent);
+                    finish();
                 }else {
                     Toast.makeText(MainActivity.this, "Email ou Mot de Passe Invalide", Toast.LENGTH_LONG).show();
                 }
