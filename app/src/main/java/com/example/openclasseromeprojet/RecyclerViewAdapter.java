@@ -1,4 +1,4 @@
-package com.example.openclasseromeprojet;
+/*package com.example.openclasseromeprojet;
 
 import android.content.Context;
 
@@ -41,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }*/
 
 
-    public RecyclerViewAdapter(List<Player> players, Context context) {
+   /* public RecyclerViewAdapter(List<Player> players, Context context) {
         this.players = players;
         mContext = context;
 
@@ -104,7 +104,86 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
     }
-            }
+            }*/
+package com.example.openclasseromeprojet;
+
+import android.content.Context;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+
+    public interface Listener {
+        void onClickDelete(Player player);
+
+        void onItemClick(Player player);
+    }
+
+    private final List<Player> players;
+    private final Context mContext;
+    private final Listener mListener;
+
+    public RecyclerViewAdapter(List<Player> players, Context context, Listener listener) {
+        this.players = players;
+        mContext = context;
+        mListener = listener;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitems, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Player player = players.get(position);
+        Glide.with(mContext)
+                .asBitmap()
+                .load(player.getImageUrl())
+                .into(holder.imageUrl);
+        holder.imageName.setText(player.getName());
+        holder.mDeleteImage.setOnClickListener(view -> mListener.onClickDelete(player));
+        holder.itemView.setOnClickListener(view -> mListener.onItemClick(player));
+    }
+
+    @Override
+    public int getItemCount() {
+        return players.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        CircleImageView imageUrl;
+        TextView imageName;
+        LinearLayout parentLayout;
+        ImageView mDeleteImage;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            imageUrl = itemView.findViewById(R.id.image);
+            imageName = itemView.findViewById(R.id.image_name);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
+            mDeleteImage = itemView.findViewById(R.id.image_delete);
+        }
+    }
+}
+
 
 
 
